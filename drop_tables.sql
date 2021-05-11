@@ -1,0 +1,6 @@
+DROP TABLE products CASCADE;
+DROP TABLE styles CASCADE;
+DROP TABLE features;
+DROP TABLE photos;
+DROP TABLE skus;
+DROP TABLE related;

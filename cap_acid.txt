@@ -1,0 +1,69 @@
+ACID
+transaction = set of operations, read, and write
+acid = rules for transactions that ensure consistent/correct data
+atomiticity - per transaction integrity (if 1 part of a transaction fails - should the whole transaction fail?)
+consistency - data validation, only data following rules should be allowed to be written in the db (if failed, roll back to previous state)
+isolation - concurrently process multiple transactions (each transaction should not affect the others), timing, isolation ensures that requests are processed in order
+  (ex. 10 items in stock; 2 orders come in: order for 5 then order for 6, the 2nd request should be able to buy 5)
+durability - finished transactions should eventually be written (even if service goes down)
+
+CAP
+there is a balance between these 3 (choose 2)
+consistency - every read receives the most recent write/error
+availability - every request receives a response (non-error), without the guarantee that it contains the most recent write
+partition tolerance - the system continues to operate despite messages being dropped/delayed by the network (between nodes)
+mongo - CP better
+SQL (RDBMS) - CA better
+Cassandra - AP better
+
+ETL
+(for importing data)
+
+/products
+[products table]
+product_id PRIMARY KEY
+name VARCHAR
+slogan VARCHAR
+description TEXT
+category VARCHAR
+default_price VARCHAR
+
+
+/products/:product_id
+[features table]
+(1-to-many relationship (1 product can have 0 or many features))
+ ref: product_id
+ ref: name
+ ref: slogan
+ ref: description
+ ref: category
+ ref: default_price
+feature VARCHAR
+value VARCHAR
+
+/products/:product_id/styles
+[styles table]
+product_id (FOREIGN KEY)
+style_id integer
+name VARCHAR
+original_price VARCHAR
+sale_price VARCHAR
+default? BOOL
+photos 
+
+[photos table]
+product_id 
+style_id
+thumbnail_url VARCHAR
+url VARCHAR
+
+[skus table]
+product_id
+style_id
+sku VARCHAR
+quantity TINYINT
+size VARCHAR 2
+
+[related products table]
+product_id
+relatedids
