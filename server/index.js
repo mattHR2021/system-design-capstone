@@ -43,6 +43,6 @@ app.use((req, res, next) => {
 
 // routes =================================================================== //
 // prepend /api/ ???
-//app.use('/api/products', require('./routes/products.js'));
+app.use('/api/products', require('./routes/products.js'));
 
 module.exports = app;
